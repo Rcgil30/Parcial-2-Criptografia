@@ -66,6 +66,7 @@ def init_connection():
         s.bind((HOST, PORT))
         s.listen()
         conn, _ = s.accept()
+        print("Conexión establecida con Alice")
         sk, pk = generate_keys()
         data = conn.recv(1024)
         alice_pk = ECC.import_key(data)

@@ -63,7 +63,7 @@ def derive_shared_key(private_key, public_key):
 def init_connection():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
-        print("Conectado al servidor.")
+        print("Conexión establecida con Bob.")
         sk, pk = generate_keys()
         s.sendall(pk.export_key(format='DER'))
         bob_pk = ECC.import_key(s.recv(1024))
