@@ -55,12 +55,12 @@ def receive_messages(conn):
             if mode == "1":
                 cipher_rsa = PKCS1_OAEP.new(bob_private_key)
                 plaintext = cipher_rsa.decrypt(data).decode()
-                print(f"\nCliente: {plaintext}")
+                print(f"\nAlice: {plaintext}")
             elif mode == "2":
                 plaintext = elgamal_decrypt(data, bob_elgamal_privkey, elgamal_params)
-                print(f"\nCliente: {plaintext}")
+                print(f"\nAlice: {plaintext}")
             else:
-                print(f"\nCliente (sin descifrar): {data}")
+                print(f"\nAlice (sin descifrar): {data}")
         except Exception as e:
             print("Error al descifrar:", e)
             break
@@ -93,6 +93,7 @@ HOST = '127.0.0.1'
 PORT = 65432
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((HOST, PORT))
     s.listen()
     print(f"Servidor escuchando en {HOST}:{PORT}...")

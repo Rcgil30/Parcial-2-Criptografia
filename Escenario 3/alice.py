@@ -73,12 +73,12 @@ def receive_messages(sock):
             if mode == "1":
                 cipher_rsa = PKCS1_OAEP.new(alice_private_key)
                 plaintext = cipher_rsa.decrypt(data).decode()
-                print(f"\nServidor: {plaintext}")
+                print(f"\nBob: {plaintext}")
             elif mode == "2":
                 plaintext = elgamal_decrypt(data, alice_elgamal_privkey, elgamal_params)
-                print(f"\nServidor: {plaintext}")
+                print(f"\nBob: {plaintext}")
             else:
-                print(f"\nServidor (sin descifrar): {data}")
+                print(f"\nBob (sin descifrar): {data}")
         except Exception as e:
             print("Error al descifrar:", e)
             break
